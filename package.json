@@ -9,7 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ways": "node ./parse-way > ways.json && echo '}' >> ways.json",
+    "nodes": "node ./parse-node > nodes.json && echo '}' >> nodes.json"
   },
   "author": "",
   "license": "MIT"
