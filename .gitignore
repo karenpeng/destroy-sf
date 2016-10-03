@@ -17,4 +17,5 @@ node_modules/*
 sf.pbf
 nodes.json
 ways.json
+relations.json
 flat-ways.json
