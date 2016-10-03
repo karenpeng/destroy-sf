@@ -17,3 +17,4 @@ node_modules/*
 sf.pbf
 nodes.json
 ways.json
+flat-ways.json
