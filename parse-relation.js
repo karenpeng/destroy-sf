@@ -8,7 +8,10 @@ var first = true
 //var test = []
 const parser = through.obj(function (items, enc, next) {
   items.forEach(function (item) {
-    if (item.type === 'relation' && (item.tags.type === 'multipolygon' || item.tags.type === 'building')) {
+    if (item.type === 'relation' && (
+      item.tags.type === 'multipolygon' ||
+      item.tags.type === 'building' ||
+      item.tags.type === 'polygon')) {
       console.log(`${
         first ? '' : ','
       }"${item.id}":[${

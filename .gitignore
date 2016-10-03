@@ -19,3 +19,4 @@ nodes.json
 ways.json
 relations.json
 flat-ways.json
+geometry.json

@@ -1,8 +1,5 @@
-all: flat-ways.json relations.json
+all: geometry.json
 	echo "done"
-
-flat-ways.json: nodes.json ways.json flatten-ways.js
-	node flatten-ways.js > flat-ways.json
 
 nodes.json: sf.pbf parse-node.js truncate-point.js
 	node parse-node.js > nodes.json
@@ -15,3 +12,6 @@ ways.json: sf.pbf parse-way.js
 relations.json: sf.pbf parse-relation.js
 	node parse-relation.js > relations.json
 	echo '}' >> relations.json
+
+geometry.json: relations.json nodes.json ways.json build-geometry.js
+	node build-geometry.js > geometry.json

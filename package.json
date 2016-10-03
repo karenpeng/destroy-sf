@@ -4,12 +4,13 @@
   "description": "",
   "main": "parse.js",
   "dependencies": {
+    "cdt2d": "^1.0.0",
+    "clean-pslg": "^1.1.0",
     "osm-pbf-parser": "^2.3.0",
     "through": "^2.3.8"
   },
   "devDependencies": {},
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "MIT"
 }

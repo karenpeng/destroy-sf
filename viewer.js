@@ -1,27 +1,10 @@
-const regl = require('regl')()
+const regl = require('regl')({
+  extensions: 'OES_element_index_uint'
+})
 const camera = require('regl-camera')(regl, {
   distance: 8
 })
-const flatWays = require('./flat-ways.json')
-
-function unpack (p) {
-  return p / 32768 - 1
-}
-
-const positions = (function () {
-  const result = []
-  Object.keys(flatWays).forEach(function (id) {
-    const way = flatWays[id]
-    for (let i = 2; i < way.length; i += 2) {
-      result.push(
-        unpack(way[i - 2]),
-        unpack(way[i - 1]),
-        unpack(way[i]),
-        unpack(way[i + 1]))
-    }
-  })
-  return result
-})()
+const geometry = require('./geometry.json')
 
 const map = {
   thickness: 3,
@@ -40,27 +23,28 @@ const map = {
     uniform mat4 projection, view;
     uniform float time;
     void main() {
+
+      vec2 p2d = position / 32768.0 - 1.0;
+
       vec3 p3d = vec3(
-        position.x,
+        p2d.x,
         0,
-        position.y);
+        p2d.y);
       gl_Position = projection * view * vec4(p3d, 1);
     }
     `,
 
     attributes: {
-      position: positions
+      position: geometry.positions
     },
 
     uniforms: {
       time: ({tick}) => 0.01 * tick
     },
 
-    primitive: 'lines',
-
     lineWidth: 1,
 
-    count: positions.length / 2
+    elements: geometry.cells
   })
 }
 
