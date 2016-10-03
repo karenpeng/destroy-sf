@@ -14,9 +14,5 @@ results
 npm-debug.log
 node_modules/*
 *.DS_Store
-sf.pbf
-nodes.json
-ways.json
-relations.json
-flat-ways.json
-geometry.json
+build/sf.pbf
+build/*.json

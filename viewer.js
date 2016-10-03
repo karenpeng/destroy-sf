@@ -4,7 +4,23 @@ const regl = require('regl')({
 const camera = require('regl-camera')(regl, {
   distance: 8
 })
-const geometry = require('./geometry.json')
+// const geometry = require('./geometry.json')
+const flatWays = require('./flat-ways.json')
+
+const positions = (function () {
+  const result = []
+  Object.keys(flatWays).forEach(function (id) {
+    const way = flatWays[id]
+    for (let i = 2; i < way.length; i += 2) {
+      result.push(
+        way[i - 2],
+        way[i - 1],
+        way[i],
+        way[i + 1])
+    }
+  })
+  return result
+})()
 
 const map = {
   thickness: 3,
@@ -35,7 +51,7 @@ const map = {
     `,
 
     attributes: {
-      position: geometry.positions
+      position: positions
     },
 
     uniforms: {
@@ -44,7 +60,8 @@ const map = {
 
     lineWidth: 1,
 
-    elements: geometry.cells
+    count: positions.length / 2,
+    primitive: 'lines'
   })
 }
 

@@ -1,17 +1,17 @@
-all: geometry.json
+all: build/geometry.json
 	echo "done"
 
-nodes.json: sf.pbf parse-node.js truncate-point.js
-	node parse-node.js > nodes.json
-	echo '}' >> nodes.json
+build/nodes.json: build/sf.pbf build/parse-node.js build/truncate-point.js
+	node build/parse-node.js > build/nodes.json
+	echo '}' >> build/nodes.json
 
-ways.json: sf.pbf parse-way.js
-	node parse-way.js > ways.json
-	echo '}' >> ways.json
+build/ways.json: build/sf.pbf build/parse-way.js
+	node build/parse-way.js > build/ways.json
+	echo '}' >> build/ways.json
 
-relations.json: sf.pbf parse-relation.js
-	node parse-relation.js > relations.json
-	echo '}' >> relations.json
+build/relations.json: build/sf.pbf build/parse-relation.js
+	node build/parse-relation.js > build/relations.json
+	echo '}' >> build/relations.json
 
-geometry.json: relations.json nodes.json ways.json build-geometry.js
-	node build-geometry.js > geometry.json
+build/geometry.json: build/relations.json build/nodes.json build/ways.json build/build-geometry.js
+	node build/build-geometry.js > build/geometry.json
