@@ -16,3 +16,4 @@ node_modules/*
 *.DS_Store
 build/sf.pbf
 build/*.json
+build/*.bin
