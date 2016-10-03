@@ -5,6 +5,8 @@
   "main": "parse.js",
   "dependencies": {
     "osm-pbf-parser": "^2.3.0",
+    "regl": "^1.2.1",
+    "regl-camera": "^1.1.0",
     "through": "^2.3.8"
   },
   "devDependencies": {},
@@ -12,7 +14,8 @@
     "ways": "node ./parse-way > ways.json && echo '}' >> ways.json",
     "nodes": "node ./parse-node > nodes.json && echo '}' >> nodes.json",
     "flatten-ways": "node ./flatten-ways > flat-ways.json",
-    "build-geom": "npm run ways && npm run nodes && npm run flatten-ways"
+    "build-geom": "npm run ways && npm run nodes && npm run flatten-ways",
+    "viewer": "budo viewer.js --open --live"
   },
   "author": "",
   "license": "MIT"
