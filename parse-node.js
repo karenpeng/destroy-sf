@@ -1,6 +1,7 @@
 var fs = require('fs')
 var through = require('through2')
 var parseOSM = require('osm-pbf-parser')
+var truncate = require('./truncate-point').truncate
 
 var osm = parseOSM()
 var first = true
@@ -10,7 +11,7 @@ const parser = through.obj(function (items, enc, next) {
     if (item.type === 'node') {
       console.log(`${
         first ? '' : ','
-      }"${item.id}":[${item.lat},${item.lon}]`)
+      }"${item.id}":[${truncate(item.lat, item.lon)}]`)
       first = false
     }
   })
