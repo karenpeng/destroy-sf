@@ -6,7 +6,10 @@ var simplifyPSLG = require('simplify-planar-graph')
 var orient = require('robust-orientation')
 
 var first = true
-console.log('[')
+var vertexCount = 0
+var faceCount = 0
+
+console.log('{"buildings":[')
 buildings.forEach(function ({p, t}) {
   var height = 10
   if (t.height) {
@@ -52,7 +55,7 @@ buildings.forEach(function ({p, t}) {
       if (orient(
         positions[cell[0]],
         positions[cell[1]],
-        positions[cell[2]]) < 0) {
+        positions[cell[2]]) > 0) {
         const tmp = cell[0]
         cell[0] = cell[1]
         cell[1] = tmp
@@ -60,9 +63,12 @@ buildings.forEach(function ({p, t}) {
     })
   }
 
+  vertexCount += positions.length
+  faceCount += cells.length
+
   console.log(`${first ? '' : ','}[${height},[${
     positions.map((q) => q.map(Math.round))
   }],[${cells}]]`)
   first = false
 })
-console.log(']')
+console.log(`],"vertexCount":${vertexCount},"faceCount":${faceCount}}`)
