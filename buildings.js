@@ -28,12 +28,13 @@ module.exports = function initBuildings (regl, rawData) {
     uniform mat4 projection, view;
     varying vec3 N;
     void main() {
-      float height = hnormal.x;
+      float height = 0.0125 * hnormal.x;
+      vec3 normal = normalize(hnormal.yzw - 0.5);
       vec3 P = vec3(
         latlon.x - 0.5,
-        0.05 * height,
+        height,
         latlon.y - 0.5);
-      N = normalize(hnormal.yzw - 0.5);
+      N = normal;
       gl_Position = projection * view * vec4(P, 1);
     }
     `,

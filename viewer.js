@@ -3,7 +3,9 @@ const regl = require('regl')({
 })
 const initBuildings = require('./buildings')
 const camera = require('regl-camera')(regl, {
-  distance: 5
+  distance: 1.0,
+  zNear: 0.01,
+  zFar: 10.0
 })
 const draw = {
   buildings: function () {}
